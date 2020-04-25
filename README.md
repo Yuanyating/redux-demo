@@ -32,6 +32,6 @@
 
 ## redux-thunk中间件
 
-(1) 在createStore中引用，applyMiddleware(thunk)
-(2) redux-thunk最重要的思想，是可以接收一个返回函数的action creator
-(3) 可以在该action creator中做异步操作，传递dispatch和getState
+(1) 在createStore中引用，applyMiddleware(thunk)  
+(2) redux-thunk最重要的思想，是可以接收一个返回函数的action creator  
+(3) 可以在该action creator中做异步操作，传递dispatch和getState  
