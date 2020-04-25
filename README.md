@@ -1,68 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Redux TodoList
 
-## Available Scripts
+**这是一个学习Redux数据流管理的小例子TodoList**
+**为了界面美观一些引用了antd**
+**项目使用了react-create-app脚手架**
 
-In the project directory, you can run:
+## 记录一 Redux三个小坑
 
-### `npm start`
+(1) store必须是唯一的，整个项目只有一个store空间
+(2) 只有store能改变自己的内容，reducer不能改变。 reducer里只能接收state，不能改变state
+(3) reducer必须是纯函数
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 记录二 actionTypes文件 actionCreators文件
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+(1) actionTypes给每个action的type一一对应的常量
+(2) actionCreators是对action的一种封装
 
-### `npm test`
+## 记录三 将UI与业务逻辑分离
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+利用父子组件的方式将业务逻辑中的数据传递给UI
 
-### `npm run build`
+## 将UI设计为无状态组件
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+因为UI中不需调用任何state，因此可以将class和Component拿掉
+无状态组件性能比继承类组件好，因此在项目中要尽量使用无状态组件
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 如何在redux展现接口请求到的数据
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+(1) 使用阿里RAP2模拟网络接口
+(2) 使用axios
+(3) 在componentDidMount中请求数据，写法与普通函数一致
 
-### `npm run eject`
+## redux-thunk中间件
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+(1) 在createStore中引用，applyMiddleware(thunk)
+(2) redux-thunk最重要的思想，是可以接收一个返回函数的action creator
+(3) 可以在该action creator中做异步操作，传递dispatch和getState
